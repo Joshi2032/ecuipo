@@ -1,24 +1,20 @@
 <template>
-  <nav class="navbar">
-    <div class="navbar-container">
-      <!-- Logotipo -->
-      <div class="logo">
-        <img src="@/assets/tecnm.png" alt="Logo" />
-      </div>
-
-      <!-- Barra de búsqueda -->
-      <div class="search-bar">
-        <input type="text" placeholder="Buscar..." v-model="searchQuery" />
-        <button @click="onSearch">🔍</button>
-      </div>
-
-      <!-- Ícono de login -->
-      <div class="login-icon">
-        <button @click="onLogin">
-          <img src="@/assets/login-icon.png" alt="Login" />
-        </button>
-      </div>
+  <nav class="dashboard">
+    <div class="logo-container">
+      <img src="@/assets/tecnm.png" alt="logo escolar" class="logo" />
     </div>
+    <div class="search-container">
+      <input type="text" placeholder="Buscar..." v-model="searchQuery" class="search-bar" />
+    </div>
+    <ul class="nav-links">
+      <li>
+        <!-- Cambiar el 'to' para que apunte al nombre de la ruta -->
+        <router-link :to="{ name: 'loginInitial' }">
+          <img src="@/assets/sesion.png" alt="usuario" class="icon" />
+          <span>Usuario</span>
+        </router-link>
+      </li>
+    </ul>
   </nav>
 </template>
 
@@ -34,85 +30,138 @@ export default {
       console.log("Buscando:", this.searchQuery);
       // Lógica adicional para manejar la búsqueda
     },
-    onLogin() {
-      console.log("Login clickeado");
-      // Lógica adicional para manejar el login
-    },
   },
 };
 </script>
 
 <style scoped>
-.navbar {
+/* Eliminar márgenes y paddings globales */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: linear-gradient(90deg, #2196f3, #21cbf3);
-  padding: 10px 20px;
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
+
+.dashboard:hover {
+  background: linear-gradient(90deg, #21cbf3, #2196f3);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+.search-container {
+  flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px;
-}
-
-.logo img {
-  height: 40px;
+  margin: 0 2rem;
+  position: relative;
 }
 
 .search-bar {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  margin: 0 20px;
+  width: 100%;
+  max-width: 500px;
+  padding: 0.7rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
 }
 
-.search-bar input {
-  flex: 1;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
+.search-bar:focus {
   outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 
-.search-bar button {
-  margin-left: 8px;
-  padding: 8px 12px;
-  background-color: #ffffff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
 }
 
-.search-bar button:hover {
-  background-color: #f0f0f0;
+.nav-links li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s ease;
 }
 
-.login-icon button {
-  background: none;
-  border: none;
-  cursor: pointer;
+.nav-links li:hover {
+  transform: translateY(-5px);
 }
 
-.login-icon img {
-  height: 30px;
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.3s ease;
 }
 
+.nav-links a:hover {
+  color: #ffcc00;
+}
+
+.icon {
+  height: 40px;
+  width: 40px;
+  transition: transform 0.3s ease;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+/* Responsivo */
 @media (max-width: 768px) {
-  .navbar-container {
+  .dashboard {
     flex-direction: column;
+    align-items: center;
   }
 
-  .search-bar {
+  .search-container {
     margin: 10px 0;
     width: 100%;
   }
 
-  .search-bar input {
+  .search-bar {
     width: 100%;
   }
 }
