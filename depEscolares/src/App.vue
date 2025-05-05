@@ -35,9 +35,14 @@ const navbarComponent = computed(() => {
 </script>
 
 <style>
+
 /* Estilos globales opcionales */
 body {
   margin: 0;
   font-family: sans-serif;
+  background: linear-gradient(90deg, #2196f3, #6a11cb); /* Gradiente modificado */
+  color: white; /* Asegúrate de que el texto sea legible */
+  min-height: 100vh; /* Asegura que el fondo cubra toda la pantalla */
 }
+
 </style>

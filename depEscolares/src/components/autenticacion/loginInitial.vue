@@ -28,55 +28,70 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(90deg, #2196f3, #21cbf3);
   color: white;
   text-align: center;
+  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .content {
-  max-width: 400px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+  line-height: 1.2;
 }
 
 p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
+  color: #f0f0f0;
 }
 
 .buttons {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 12px 25px;
   font-size: 1rem;
-  color: #2196f3;
+  font-weight: bold;
+  color: #4facfe;
   background: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
   background: #e3f2fd;
-  transform: scale(1.05);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
-@media (max-width: 600px) {
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
   h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 
   p {
@@ -85,6 +100,21 @@ button:hover {
 
   button {
     font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.8rem;
     padding: 8px 16px;
   }
 }
