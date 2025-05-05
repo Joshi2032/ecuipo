@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import apiService from "@/services/apiService"; // Asegúrate de importar tu servicio API
+import { useRouter } from "vue-router"; // Si estás usando Vue Router
 export default {
   data() {
     return {
@@ -41,8 +43,22 @@ export default {
   },
   methods: {
     submitForm() {
-      console.log('Formulario enviado:', this.form);
-    }
+  console.log('Formulario enviado:', this.form);
+  
+  apiService.registrarUsuario(this.form)
+    .then(response => {
+      console.log('Usuario registrado con éxito:', response.data);
+      alert('Registro exitoso');
+      // Opcionalmente: limpiar formulario o redirigir
+      this.form.nombre = '';
+      this.form.email = '';
+      this.form.password = '';
+    })
+    .catch(error => {
+      console.error('Error al registrar usuario:', error.response?.data || error.message);
+      alert('Error al registrar usuario. Revisa los campos o el servidor.');
+    });
+}
   }
 };
 </script>
