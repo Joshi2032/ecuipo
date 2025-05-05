@@ -27,12 +27,17 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 800px;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
   color: white;
   text-align: center;
-  font-family: 'Roboto', sans-serif;
-  padding: 20px;
-  box-sizing: border-box;
 }
 
 .content {
