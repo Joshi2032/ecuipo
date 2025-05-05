@@ -4,33 +4,15 @@
       <h2>Registro</h2>
       <div class="form-group">
         <label for="name">Nombre</label>
-        <input
-          type="text"
-          id="name"
-          v-model="form.name"
-          placeholder="Ingresa tu nombre"
-          required
-        />
+        <input type="text" id="name" v-model="form.name" placeholder="Ingresa tu nombre" required />
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          v-model="form.email"
-          placeholder="Ingresa tu email"
-          required
-        />
+        <input type="email" id="email" v-model="form.email" placeholder="Ingresa tu email" required />
       </div>
       <div class="form-group">
         <label for="password">Contraseña</label>
-        <input
-          type="password"
-          id="password"
-          v-model="form.password"
-          placeholder="Ingresa tu contraseña"
-          required
-        />
+        <input type="password" id="password" v-model="form.password" placeholder="Ingresa tu contraseña" required />
       </div>
       <button type="submit">Registrarse</button>
     </form>
@@ -38,6 +20,9 @@
 </template>
 
 <script>
+import apiService from "@/services/apiService"; // Asegúrate de tener un servicio API configurado
+import { useRouter } from "vue-router"; // Asegúrate de usar vue-router para redirección
+
 export default {
   data() {
     return {
@@ -50,8 +35,17 @@ export default {
   },
   methods: {
     handleSubmit() {
-      console.log("Formulario enviado:", this.form);
-      // Aquí puedes agregar lógica para enviar los datos al servidor
+      apiService
+        .register(this.form)
+        .then((response) => {
+          console.log("Usuario registrado exitosamente:", response.data);
+          // Redirigir al dashboard o mostrar mensaje
+          this.$router.push("/dashboard-alumno"); // o donde desees redirigir
+        })
+        .catch((error) => {
+          console.error("Error al registrar el usuario:", error);
+          alert("No se pudo registrar el usuario. Intenta de nuevo.");
+        });
     },
   },
 };

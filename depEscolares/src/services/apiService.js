@@ -12,5 +12,9 @@ export default {
     // Método para login de un usuario
     iniciarSesion(email, password) {
         return api.post("/login", { email, password });
+    },
+    // Registrar usuarios
+    register(userData) {
+        return api.post("/usuarios", userData);
     }
 }
