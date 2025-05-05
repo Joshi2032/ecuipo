@@ -1,5 +1,7 @@
 package com.example.apiEscolares.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +21,19 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Usuario loginUsuario) {
-        Usuario usuarioExistente = usuarioRepository.findByEmailAndPassword(loginUsuario.getEmail(), loginUsuario.getPassword()).orElse(null);
+        Usuario usuarioExistente = usuarioRepository.findByEmailAndPassword(
+                loginUsuario.getEmail(),
+                loginUsuario.getPassword()).orElse(null);
+
         if (usuarioExistente != null) {
-            return ResponseEntity.ok().body("Inicio de sesión exitoso");
+            return ResponseEntity.ok().body(Map.of(
+                    "mensaje", "Inicio de sesión exitoso",
+                    "usuario", usuarioExistente.getNombre(),
+                    "rol", usuarioExistente.getRoles().getNombre()));
+
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Correo o contraseña incorrectos");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Correo o contraseña incorrectos");
         }
     }
 }
-

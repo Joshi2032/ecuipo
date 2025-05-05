@@ -74,11 +74,12 @@ public class Usuario {
         this.password = password;
     }
 
-    public Roles getroles() {
+    public Roles getRoles() {
         return roles;
     }
-
-    public void setroles(Roles roles) {
+    
+    public void setRoles(Roles roles) {
         this.roles = roles;
     }
+    
 }
