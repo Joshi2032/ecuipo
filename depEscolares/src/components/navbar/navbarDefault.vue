@@ -15,7 +15,9 @@
       <!-- Ícono de login -->
       <div class="login-icon">
         <button @click="onLogin">
-          <img src="@/assets/login-icon.png" alt="Login" />
+          <router-link to=".">
+          <img src="@/assets/usuario.png" alt="Login" />
+        </router-link>
         </button>
       </div>
     </div>

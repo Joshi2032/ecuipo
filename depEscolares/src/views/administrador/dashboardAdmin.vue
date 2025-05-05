@@ -1,8 +1,8 @@
 <template>
     <navbarAdmin />
-    <listaUsuarios />
+    <listaHerramientas />
 </template>
 <script setup>
 import navbarAdmin from '@/components/navbarAdmin.vue'
-import listaUsuarios from '@/components/listaUsuarios.vue'
+import listaHerramientas from '@/components/listaHerramientas.vue'
 </script>

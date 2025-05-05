@@ -1,14 +1,43 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
-  <header>
-    
-  </header>
+  <!-- Navbar dinámica según el rol -->
+  <component :is="navbarComponent" />
 
-  <RouterView />
+  <!-- Aquí se renderiza la vista actual -->
+  <router-view />
 </template>
 
-<style scoped>
+<script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+// Importar los 3 tipos de navbar
+import NavbarDefault from '@/components/navbar/navbarDefault.vue'
+import NavbarAlumno from '@/components/navbar/Alumnos/NavbarAlumno.vue'
+import NavbarAdmin from '@/components/navbar/Administradores/NavbarAdmin.vue'
+
+// Simulación de cómo obtendrías el rol (reemplaza con Vuex o Pinia si usas)
+const route = useRoute()
+
+// Función para obtener el rol desde localStorage, Vuex o API
+const getUserRole = () => {
+  // Puedes guardar el rol después del login como 'alumno', 'admin', o null
+  return localStorage.getItem('rol') || 'default'
+}
+
+// Computed para decidir qué navbar mostrar
+const navbarComponent = computed(() => {
+  const role = getUserRole()
+
+  if (role === 'alumno') return NavbarAlumno
+  if (role === 'admin') return NavbarAdmin
+  return NavbarDefault
+})
+</script>
+
+<style>
+/* Estilos globales opcionales */
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
 </style>

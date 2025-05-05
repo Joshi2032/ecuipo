@@ -1,8 +1,9 @@
 <template>
-    <navbarDefault/>
-    <login/>
+    <navbarDefault />
+    <loginInitial />
+
 </template>
 <script setup>
 import navbarDefault from '@/components/navbarDefault.vue'
-import login from '@/components/login.vue'
+import loginInitial from '@/components/loginInitial.vue'
 </script>

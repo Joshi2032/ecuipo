@@ -1,8 +1,8 @@
 <template>
     <navbarAlumno />
-    <perfilUsuario />
+    <listaHerramientas />
 </template>
 <script setup>
 import navbarAlumno from '@/components/navbarAlumno.vue'
-import perfilUsuario from '@/components/perfilUsuario.vue'
+import listaHerramientas from '@/components/listaHerramientas.vue'
 </script>
