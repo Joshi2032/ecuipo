@@ -3,6 +3,6 @@
     <listaHerramientas />
 </template>
 <script setup>
-import navbarDefault from '@/components/navbarDefault.vue'
-import listaHerramientas from '@/components/listaHerramientas.vue'
+import navbarDefault from '@/components/navbar/navbarDefault.vue'
+import listaHerramientas from '@/components/Herramientas/listaHerramientas.vue'
 </script>

@@ -6,8 +6,8 @@
 </template>
 
 <script setup>
-import navbarDefault from '@/components/navbarDefault.vue'
-import loginInitial from '@/components/loginInitial.vue'
+import navbarDefault from '@/components/navbar/navbarDefault.vue'
+import loginInitial from '@/components/autenticacion/loginInitial.vue'
 </script>
 
 <style scoped>

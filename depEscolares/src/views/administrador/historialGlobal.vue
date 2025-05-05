@@ -3,6 +3,6 @@
     <historialPrestamos/>
 </template>
 <script setup>
-import navbarAdmin from '@/components/navbarAdmin.vue'
-import historialPrestamos from '@/components/historialPrestamos.vue'
+import navbarAdmin from '@/components/navbar/Administradores/navbarAdmin.vue'
+import historialPrestamos from '@/components/prestamos/historialPrestamos.vue'
 </script>

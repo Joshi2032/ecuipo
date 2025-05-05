@@ -3,6 +3,6 @@
     <prestamosRecientes />
 </template>
 <script setup>
-import navarAlumno from '@/components/navbarAlumno.vue'
-import prestamosRecientes from '@/components/prestamosRecientes.vue'
+import navarAlumno from '@/components/navbar/Alumnos/navbarAlumno.vue'
+import prestamosRecientes from '@/components/prestamos/prestamosRecientes.vue'
 </script>

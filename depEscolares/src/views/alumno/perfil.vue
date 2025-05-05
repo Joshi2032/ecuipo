@@ -3,6 +3,6 @@
     <perfilUsuario />
 </template>
 <script setup>
-import navbarAlumno from '@/components/navbarAlumno.vue'
-import perfilUsuario from '@/components/perfilUsuario.vue'
+import navbarAlumno from '@/components/navbar/Alumnos/navbarAlumno.vue'
+import perfilUsuario from '@/components/Usuarios/perfilUsuario.vue'
 </script>

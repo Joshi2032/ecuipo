@@ -3,6 +3,6 @@
     <login/>
 </template>
 <script setup>
-import navbarDefault from '@/components/navbarDefault.vue'
-import login from '@/components/login.vue'
+import navbarDefault from '@/components/navbar/navbarDefault.vue'
+import login from '@/components/autenticacion/login.vue'
 </script>

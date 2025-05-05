@@ -3,6 +3,6 @@
     <listaHerramientas />
 </template>
 <script setup>
-import navbarAdmin from '@/components/navbarAdmin.vue'
-import listaHerramientas from '@/components/listaHerramientas.vue'
+import navbarAdmin from '@/components/navbar/Administradores/navbarAdmin.vue'
+import listaHerramientas from '@/components/Herramientas/listaHerramientas.vue'
 </script>

@@ -12,8 +12,8 @@ import { useRoute } from 'vue-router'
 
 // Importar los 3 tipos de navbar
 import NavbarDefault from '@/components/navbar/navbarDefault.vue'
-import NavbarAlumno from '@/components/navbar/Alumnos/NavbarAlumno.vue'
-import NavbarAdmin from '@/components/navbar/Administradores/NavbarAdmin.vue'
+import NavbarAlumno from '@/components/navbar/Alumnos/navbarAlumno.vue'
+import NavbarAdmin from '@/components/navbar/Administradores/navbarAdmin.vue'
 
 // Simulación de cómo obtendrías el rol (reemplaza con Vuex o Pinia si usas)
 const route = useRoute()

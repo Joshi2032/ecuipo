@@ -39,6 +39,14 @@ const router = createRouter({
       name: 'loginInitial',
       component: () => import('@/components/autenticacion/loginInitial.vue'),
     },
+    {
+      path: '/loginInitialV',
+      name: 'loginInitialV',
+      component: () => import('@/views/publico/loginInitial.vue'),
+    },
+    {
+
+    },
   ],
 })
 
