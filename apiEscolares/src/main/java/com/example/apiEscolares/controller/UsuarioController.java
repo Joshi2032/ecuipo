@@ -51,7 +51,7 @@ public class UsuarioController {
         }
 
         Usuario usuario = usuarioOpt.get();
-        usuario.setroles(rolOpt.get());
+        usuario.setRoles(rolOpt.get());
         usuarioRepository.save(usuario);
 
         return ResponseEntity.ok("Rol actualizado a: " + nuevoRolNombre);

@@ -31,7 +31,7 @@
             required
             aria-label="Contraseña"
           />
-        <button type="submit" class="login-button">Ingresar</button>
+          <button type="button" class="login-button" @click="handleLogin">Ingresar</button>
 
         </div>
       </div>
@@ -61,6 +61,9 @@
 </template>
 
 <script>
+import apiService from "@/services/apiService"; // Asegúrate de importar tu servicio API
+import { useRouter } from "vue-router"; // Si estás usando Vue Router
+
 export default {
   data() {
     return {
@@ -71,19 +74,38 @@ export default {
       errorMessage: "",
     };
   },
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
   methods: {
-    handleLogin() {
+    async handleLogin() {
       if (!this.form.email || !this.form.password) {
         this.errorMessage = "Por favor, completa todos los campos.";
         return;
       }
-      this.errorMessage = "";
-      // Aquí puedes agregar la lógica para manejar el inicio de sesión
-      console.log("Email:", this.form.email);
-      console.log("Password:", this.form.password);
+
+      try {
+        const response = await apiService.iniciarSesion(this.form.email, this.form.password);
+        const usuario = response.data;
+
+        // Verificar el rol
+        if (usuario.rol === "admin") {
+          this.router.push("/dashboardAdmin");
+        } else if (usuario.rol === "alumno") {
+          this.router.push("/dashboardAlumno");
+        } else {
+          this.errorMessage = "Rol desconocido. Contacta al administrador.";
+        }
+
+      } catch (error) {
+        this.errorMessage = "Credenciales incorrectas o error del servidor.";
+        console.error("Error al iniciar sesión:", error);
+      }
     },
   },
 };
+
 </script>
 
 <style scoped>
