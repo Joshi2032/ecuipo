@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import('@/components/autenticacion/register.vue'),
     },
     {
+      path: '/navbarAlumno',
+      name: 'navbarAlumno',
+      component: () => import('@/components/navbar/Alumnos/navbarAlumno.vue'),
+    },
+    {
       path: '/herramientas',
       name: 'herramientas',
       component: () => import('@/components/Herramientas/listaHerramientas.vue'),

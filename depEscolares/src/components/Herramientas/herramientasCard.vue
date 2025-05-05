@@ -35,18 +35,23 @@ export default {
 
 <style scoped>
 .herramienta-card {
-  background: linear-gradient(90deg, #2196f3, #21cbf3);
-  border-radius: 8px;
-  padding: 16px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .herramienta-card:hover {
   transform: scale(1.05);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
 }
 
+/* Mantén los estilos existentes para los elementos internos */
 .herramienta-imagen {
   width: 100%;
   max-width: 150px;

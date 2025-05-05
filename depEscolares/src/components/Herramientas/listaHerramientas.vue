@@ -1,6 +1,6 @@
 <template>
-  <div class="lista-herramientas">
     <h1 class="titulo">Lista de Herramientas</h1>
+  <div class="lista-herramientas">
     <div class="herramientas-container">
       <div 
         v-for="herramienta in herramientas" 
@@ -32,21 +32,35 @@ export default {
 
 <style scoped>
 .lista-herramientas {
-  background: linear-gradient(90deg, #2196f3, #21cbf3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 800px;
   padding: 20px;
   color: white;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .titulo {
-  text-align: center;
-  margin-bottom: 20px;
+  position: absolute;
+  top: 12%; /* Ajustado para estar un 25% más abajo */
+  left: 20px;
+  margin: 0;
+  font-size: 24px;
+  color: white;
 }
 
 .herramientas-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  display: flex; /* Usar flexbox */
+  flex-wrap: wrap; /* Permitir que las tarjetas se ajusten a nuevas filas */
+  justify-content: center; /* Centrar las tarjetas horizontalmente */
+  gap: 20px; /* Espaciado entre las tarjetas */
 }
 
 .herramienta-card {
@@ -55,6 +69,9 @@ export default {
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  flex: 1 1 calc(25% - 20px); /* Cada tarjeta ocupa un 25% del ancho menos el espacio del gap */
+  max-width: calc(25% - 20px); /* Limitar el ancho máximo a 25% menos el gap */
+  box-sizing: border-box; /* Asegurar que el padding no afecte el ancho */
 }
 
 .herramienta-card h2 {
