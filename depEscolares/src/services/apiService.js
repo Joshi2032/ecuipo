@@ -17,4 +17,8 @@ export default {
     registrarUsuario(usuario) {
         return api.post("/usuarios", usuario);
     },
+    // Método para obtener todas las herramientas (Agregado)
+  getHerramientas() {
+    return api.get("/herramientas");
+  }
 }
