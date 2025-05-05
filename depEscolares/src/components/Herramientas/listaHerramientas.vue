@@ -1,5 +1,5 @@
 <template>
-    <h1 class="titulo">Lista de Herramientas</h1>
+  <h1 class="titulo">Lista de Herramientas</h1>
   <div class="lista-herramientas">
     <div class="herramientas-container">
       <div 
@@ -7,25 +7,43 @@
         :key="herramienta.id" 
         class="herramienta-card"
       >
+        <img 
+          :src="herramienta.imagenURL" 
+          alt="Imagen de la herramienta" 
+          class="herramienta-imagen"
+        />
         <h2>{{ herramienta.nombre }}</h2>
         <p>{{ herramienta.descripcion }}</p>
+        <p><strong>Stock:</strong> {{ herramienta.stock }}</p>
+        <!-- <p><strong>Agregado el:</strong> {{ herramienta.fecha_agregado }}</p> -->
+        <p><strong>Agregado el:</strong> {{ herramienta.fechaFormateada }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import apiService from "@/services/apiService"; 
+import { format } from "date-fns"; // Asegúrate de instalar date-fns si no lo tienes
 export default {
   name: "ListaHerramientas",
   data() {
     return {
-      herramientas: [
-        { id: 1, nombre: "Herramienta 1", descripcion: "Descripción de la herramienta 1" },
-        { id: 2, nombre: "Herramienta 2", descripcion: "Descripción de la herramienta 2" },
-        { id: 3, nombre: "Herramienta 3", descripcion: "Descripción de la herramienta 3" },
-        // Agrega más herramientas según sea necesario
-      ],
+      herramientas: []
     };
+  },
+  mounted() {
+    apiService.getHerramientas()
+      .then((response) => {
+        this.herramientas = response.data.map(herramienta => {
+          // Formatear la fecha
+          herramienta.fechaFormateada = format(new Date(herramienta.fechaAgregado), 'dd/MM/yyyy');
+          return herramienta;
+        });
+      })
+      .catch((error) => {
+        console.error("Error al cargar herramientas:", error);
+      });
   },
 };
 </script>
@@ -40,7 +58,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   padding: 20px;
   color: white;
   min-height: 100vh;
@@ -49,7 +67,7 @@ export default {
 
 .titulo {
   position: absolute;
-  top: 12%; /* Ajustado para estar un 25% más abajo */
+  top: 12%;
   left: 20px;
   margin: 0;
   font-size: 24px;
@@ -57,28 +75,52 @@ export default {
 }
 
 .herramientas-container {
-  display: flex; /* Usar flexbox */
-  flex-wrap: wrap; /* Permitir que las tarjetas se ajusten a nuevas filas */
-  justify-content: center; /* Centrar las tarjetas horizontalmente */
-  gap: 20px; /* Espaciado entre las tarjetas */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
 }
 
 .herramienta-card {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  flex: 1 1 calc(25% - 20px); /* Cada tarjeta ocupa un 25% del ancho menos el espacio del gap */
-  max-width: calc(25% - 20px); /* Limitar el ancho máximo a 25% menos el gap */
-  box-sizing: border-box; /* Asegurar que el padding no afecte el ancho */
+  flex: 1 1 calc(33% - 20px);
+  max-width: calc(33% - 20px);
+  box-sizing: border-box;
 }
 
 .herramienta-card h2 {
   margin-bottom: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #fff;
 }
 
 .herramienta-card p {
   font-size: 14px;
+  color: #fff;
+}
+
+.herramienta-imagen {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  margin: 0 auto 16px;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .herramienta-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  
+  .herramienta-card h2 {
+    font-size: 1rem;
+  }
 }
 </style>

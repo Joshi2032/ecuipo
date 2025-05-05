@@ -38,9 +38,9 @@ export default {
   background: rgba(255, 255, 255, 0.25);
   border-radius: 20px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  padding: 40px;
+  padding: 20px;
   width: 100%;
-  max-width: 400px;
+  max-width: 250px;
   box-sizing: border-box;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -51,7 +51,6 @@ export default {
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Mantén los estilos existentes para los elementos internos */
 .herramienta-imagen {
   width: 100%;
   max-width: 150px;
@@ -101,9 +100,9 @@ button {
   background-color: #42a5f5;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   .herramienta-card {
+    max-width: 100%;
     padding: 12px;
   }
 
