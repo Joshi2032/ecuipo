@@ -15,8 +15,29 @@
         <h2>{{ herramienta.nombre }}</h2>
         <p>{{ herramienta.descripcion }}</p>
         <p><strong>Stock:</strong> {{ herramienta.stock }}</p>
-        <!-- <p><strong>Agregado el:</strong> {{ herramienta.fecha_agregado }}</p> -->
         <p><strong>Agregado el:</strong> {{ herramienta.fechaFormateada }}</p>
+        
+        <!-- Botón para solicitar préstamo -->
+        <button 
+          v-if="isLoggedIn" 
+          @click="solicitarPrestamo(herramienta)" 
+          :disabled="herramienta.stock <= 0"
+        >
+          Solicitar Préstamo
+        </button>
+
+        <!-- Formulario para modificar cantidad de préstamo -->
+        <div v-if="herramienta.prestamoSolicitado">
+          <p><strong>Cantidad solicitada:</strong> 
+            <input 
+              v-model.number="herramienta.cantidadSolicitada" 
+              type="number" 
+              min="1" 
+              :max="herramienta.stock"
+            />
+          </p>
+          <button @click="confirmarPrestamo(herramienta)">Confirmar Préstamo</button>
+        </div>
       </div>
     </div>
   </div>
@@ -25,25 +46,67 @@
 <script>
 import apiService from "@/services/apiService"; 
 import { format } from "date-fns"; // Asegúrate de instalar date-fns si no lo tienes
+
 export default {
   name: "ListaHerramientas",
   data() {
     return {
-      herramientas: []
+      herramientas: [],
+      isLoggedIn: false, // Verifica si el usuario está autenticado (puedes manejar esto con Vuex o un sistema de autenticación)
     };
   },
   mounted() {
+    // Simulando inicio de sesión
+    // Normalmente esto lo harías con un sistema de autenticación
+    setTimeout(() => {
+      this.isLoggedIn = true;  // Cambiar estado para simular que el usuario ha iniciado sesión
+    }, 2000); // Simulamos un retraso de 2 segundos (solo para demostración)
+
     apiService.getHerramientas()
       .then((response) => {
         this.herramientas = response.data.map(herramienta => {
           // Formatear la fecha
           herramienta.fechaFormateada = format(new Date(herramienta.fechaAgregado), 'dd/MM/yyyy');
+          herramienta.prestamoSolicitado = false; // Inicializamos si se ha solicitado el préstamo
+          herramienta.cantidadSolicitada = 1; // Establecemos la cantidad por defecto
           return herramienta;
         });
       })
       .catch((error) => {
         console.error("Error al cargar herramientas:", error);
       });
+  },
+  methods: {
+    solicitarPrestamo(herramienta) {
+      // Marca que se ha solicitado el préstamo
+      herramienta.prestamoSolicitado = true;
+      // Deshabilitar botón de préstamo si el stock es 0
+      if (herramienta.stock <= 0) {
+        alert("No hay stock disponible para préstamo.");
+      }
+    },
+    confirmarPrestamo(herramienta) {
+      // Verificar que la cantidad solicitada es válida
+      if (herramienta.cantidadSolicitada <= 0 || herramienta.cantidadSolicitada > herramienta.stock) {
+        alert("Cantidad no válida.");
+        return;
+      }
+
+      // Reducir el stock de la herramienta
+      herramienta.stock -= herramienta.cantidadSolicitada;
+
+      // Realizar la solicitud del préstamo (enviar al backend para persistir los cambios)
+      apiService.solicitarPrestamo(herramienta.id, herramienta.cantidadSolicitada)
+        .then(() => {
+          alert("Préstamo confirmado");
+          // Resetear la cantidad solicitada y estado de solicitud
+          herramienta.prestamoSolicitado = false;
+          herramienta.cantidadSolicitada = 1;
+        })
+        .catch((error) => {
+          console.error("Error al confirmar préstamo:", error);
+        });
+    }
   },
 };
 </script>
